@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   /*
   ** Headers of the page
   */
@@ -40,5 +40,21 @@ module.exports = {
     }
   },
   mode: 'spa',
-  plugins: ['~/plugins/auth0.js']
+  plugins: ['~/plugins/auth0.js'],
+  generate: {
+    dir: '../public'
+  },
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
+  ]
 }
+
+if (process.env.NODE_ENV === 'development') {
+  config.proxy = {
+    '/api': 'http://localhost:3000'
+  }
+
+}
+
+module.exports = config
